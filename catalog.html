@@ -65,7 +65,7 @@
 
       async function fetchEmojis() {
         try {
-          const res = await fetch("http://localhost:5050/api/emojis");
+          const res = await fetch("https://emojii-hub-production.up.railway.app/api/emojis");
           const data = await res.json();
 
           if (!Array.isArray(data)) {
