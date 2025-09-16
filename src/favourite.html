@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emoji Hub</title>
+    <link rel="icon" type="image/x-icon" href="./css/icons/favicon.ico" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="log">Emoji Hub</div>
+        <nav>
+          <a href="./index.html">Home</a>
+          <a href="./catalog.html">Catalog</a>
+          <a href="./favourite.html">Favourites</a>
+        </nav>
+      </div>
+
+      <div
+        class="burger flex flex-col justify-between w-3.5 h-3 cursor-pointer block md:hidden"
+        onclick="toggleMenu()"
+      >
+        <span class="block h-0.5 bg-yellow-400 rounded"></span>
+        <span class="block h-0.5 bg-yellow-400 rounded"></span>
+        <span class="block h-0.5 bg-yellow-400 rounded"></span>
+      </div>
+    </header>
+
+    <main class="p-4">
+      <div
+        id="favouritesContainer"
+        class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4"
+      >
+   
+      </div>
+      <p id="emptyMessage" class="text-center text-gray-500 mt-10 hidden">
+        You have no favourites yet. Go add some!
+      </p>
+    </main>
+
+    <script>
+    
+      const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+      const container = document.getElementById("favouritesContainer");
+      const emptyMessage = document.getElementById("emptyMessage");
+
+      if (favourites.length === 0) {
+        emptyMessage.classList.remove("hidden");
+      } else {
+        favourites.forEach((emoji) => {
+          const card = document.createElement("div");
+          card.className =
+            "bg-white p-4 rounded-lg shadow flex flex-col items-center justify-center hover:scale-105 transition-transform cursor-pointer";
+          card.innerHTML = `
+          <div class="text-4xl mb-2">${emoji.char}</div>
+          <div class="text-sm text-gray-600">${emoji.name}</div>
+          <button class="mt-2 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600" onclick="removeFavourite('${emoji.id}')">
+            Remove
+          </button>
+        `;
+          container.appendChild(card);
+        });
+      }
+
+      function removeFavourite(id) {
+        let favs = JSON.parse(localStorage.getItem("favourites")) || [];
+        favs = favs.filter((e) => e.id !== id);
+        localStorage.setItem("favourites", JSON.stringify(favs));
+        location.reload(); 
+      }
+    </script>
+
+    <script src="./js/script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </body>
+</html>

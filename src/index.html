@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emoji Hub</title>
+    <link rel="icon" type="image/x-icon" href="./css/icons/favicon.ico" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="log">Emoji Hub</div>
+        <nav>
+          <a href="./index.html">Home</a>
+          <a href="./catalog.html">Catalog</a>
+          <a href="./favourite.html">Favourites</a>
+        </nav>
+      </div>
+
+      <div
+        class="burger flex flex-col justify-between w-3.5 h-3 cursor-pointer block md:hidden"
+        onclick="toggleMenu()"
+      >
+        <span class="block h-0.5 bg-yellow-400 rounded"></span>
+        <span class="block h-0.5 bg-yellow-400 rounded"></span>
+        <span class="block h-0.5 bg-yellow-400 rounded"></span>
+      </div>
+    </header>
+
+    <main>
+      <section
+        class="container my-10 md:my-2 md:mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-6"
+      >
+        <div class="text-center md:text-left relative">
+          <h1
+            class="text-3xl md:text-5xl font-bold top-[40%] text-[#023047] drop-shadow-[2px_2px_10px_rgba(0,0,0,0.2)] mb-4"
+          >
+            Welcome to the Emoji Hub 👋
+          </h1>
+          <p class="text-base sm:text-lg md:text-xl text-yellow-400 mb-6">
+            Discover, search, and explore your favourite emojis in one place
+          </p>
+          <a href="./catalog.html">
+            <button
+              class="px-4 py-2 border-2 border-[#023047] text-[#023047] text-sm sm:text-base font-bold uppercase rounded-full transition-all duration-300 ease-in-out opacity-80 hover:bg-sky-200 hover:text-blue-900 hover:opacity-100"
+            >
+              Catalog
+            </button>
+          </a>
+        </div>
+
+        <div
+          class="relative sm:w-52 md:w-[320px] lg:w-[560px] mt-0 md:mt-0 flex items-center justify-center"
+        >
+          <img
+            src="./css/icons/E148A793-7D34-47B1-8AAD-0E743FE6E5B2.PNG"
+            alt="Main Emoji"
+            class="w-full max-w-none"
+          />
+        </div>
+
+        <div
+          class="image-container absolute top-[450px] md:top-[380px] md:-right-[-320px] right-[150px] z-20 w-[100px] h-[140px] md:w-[150px] md:h-[200px] [transform-style:preserve-3d] [transform:perspective(1300px)_rotateY(0deg)] transition-transform duration-1000"
+        >
+          <span
+            class="absolute w-full h-full [transform:rotateY(calc(var(--i)*45deg))_translateZ(150px)] md:[transform:rotateY(calc(var(--i)*45deg))_translateZ(200px)]"
+            style="--i: 1"
+          >
+            <img
+              src="./css/icons/photo-output.PNG"
+              alt=""
+              class="absolute shadow-2xl left-1/2 top-1/2 w-[200px] rounded-[20px] [transform:translate(-50%,-50%)]"
+            />
+          </span>
+
+          <span
+            class="absolute w-full h-full [transform:rotateY(calc(var(--i)*45deg))_translateZ(150px)] md:[transform:rotateY(calc(var(--i)*45deg))_translateZ(200px)]"
+            style="--i: 2"
+          >
+            <img
+              src="./css/icons/photo-output 2.PNG"
+              alt=""
+              class="absolute left-1/2 shadow-2xl top-1/2 w-[200px] rounded-[20px] [transform:translate(-50%,-50%)]"
+            />
+          </span>
+
+          <span
+            class="absolute w-full h-full [transform:rotateY(calc(var(--i)*45deg))_translateZ(150px)] md:[transform:rotateY(calc(var(--i)*45deg))_translateZ(200px)]"
+            style="--i: 3"
+          >
+            <img
+              src="./css/icons/photo-output 3.PNG"
+              alt=""
+              class="absolute shadow-2xl left-1/2 top-1/2 w-[200px] rounded-[20px] [transform:translate(-50%,-50%)]"
+            />
+          </span>
+
+          <span
+            class="absolute w-full h-full [transform:rotateY(calc(var(--i)*45deg))_translateZ(150px)] md:[transform:rotateY(calc(var(--i)*45deg))_translateZ(200px)]"
+            style="--i: 4"
+          >
+            <img
+              src="./css/icons/photo-output 4.PNG"
+              alt=""
+              class="absolute shadow-2xl left-1/2 top-1/2 w-[200px] rounded-[20px] [transform:translate(-50%,-50%)]"
+            />
+          </span>
+
+          <span
+            class="absolute w-full h-full [transform:rotateY(calc(var(--i)*45deg))_translateZ(150px)] md:[transform:rotateY(calc(var(--i)*45deg))_translateZ(200px)]"
+            style="--i: 5"
+          >
+            <img
+              src="./css/icons/photo-output 5.PNG"
+              alt=""
+              class="absolute shadow-2xl left-1/2 top-1/2 w-[200px] rounded-[20px] [transform:translate(-50%,-50%)]"
+            />
+          </span>
+
+          <span
+            class="absolute w-full h-full [transform:rotateY(calc(var(--i)*45deg))_translateZ(150px)] md:[transform:rotateY(calc(var(--i)*45deg))_translateZ(200px)]"
+            style="--i: 6"
+          >
+            <img
+              src="./css/icons/photo-output 6.PNG"
+              alt=""
+              class="absolute shadow-2xl left-1/2 top-1/2 w-[200px] rounded-[20px] [transform:translate(-50%,-50%)]"
+            />
+          </span>
+
+          <span
+            class="absolute w-full h-full [transform:rotateY(calc(var(--i)*45deg))_translateZ(150px)] md:[transform:rotateY(calc(var(--i)*45deg))_translateZ(200px)]"
+            style="--i: 7"
+          >
+            <img
+              src="./css/icons/photo-output 7.PNG"
+              alt=""
+              class="absolute shadow-2xl left-1/2 top-1/2 w-[200px] rounded-[20px] [transform:translate(-50%,-50%)]"
+            />
+          </span>
+
+          <span
+            class="absolute w-full h-full [transform:rotateY(calc(var(--i)*45deg))_translateZ(150px)] md:[transform:rotateY(calc(var(--i)*45deg))_translateZ(200px)]"
+            style="--i: 8"
+          >
+            <img
+              src="./css/icons/photo-output 8.PNG"
+              alt=""
+              class="absolute shadow-2xl left-1/2 top-1/2 w-[200px] rounded-[20px] [transform:translate(-50%,-50%)]"
+            />
+          </span>
+        </div>
+      </section>
+    </main>
+
+    <script src="./js/script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </body>
+</html>
