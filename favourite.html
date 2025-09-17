@@ -3,18 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Emoji Hub</title>
+    <title>Favourites - Emoji Hub</title>
     <link rel="icon" type="image/x-icon" href="./css/icons/favicon.ico" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
+
+  <body class="bg-gray-100 min-h-screen m-0 p-0">
     <header>
       <div class="header">
         <div class="log">Emoji Hub</div>
         <nav>
           <a href="./index.html">Home</a>
           <a href="./catalog.html">Catalog</a>
-          <a href="./favourite.html">Favourites</a>
+          <a href="./favourite.html" style="color: red">Favourites</a>
         </nav>
       </div>
 
@@ -28,51 +30,52 @@
       </div>
     </header>
 
-    <main class="p-4">
+    <h1 class="text-3xl md:text-5xl font-bold text-center mb-8 mt-10">
+      Your Favourites
+    </h1>
+
+    <section class="mx-8 md:mx-20">
       <div
-        id="favouritesContainer"
-        class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4"
-      >
-   
-      </div>
-      <p id="emptyMessage" class="text-center text-gray-500 mt-10 hidden">
-        You have no favourites yet. Go add some!
-      </p>
-    </main>
+        id="favourites-container"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+      ></div>
+    </section>
 
     <script>
-    
-      const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
-      const container = document.getElementById("favouritesContainer");
-      const emptyMessage = document.getElementById("emptyMessage");
+      const favContainer = document.getElementById("favourites-container");
+      let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
 
-      if (favourites.length === 0) {
-        emptyMessage.classList.remove("hidden");
-      } else {
-        favourites.forEach((emoji) => {
+      function renderFavourites() {
+        favContainer.innerHTML = "";
+        if (favourites.length === 0) {
+          favContainer.innerHTML =
+            '<p class="text-gray-500 text-center col-span-full">No favourites yet...</p>';
+          return;
+        }
+
+        favourites.forEach((emoji, index) => {
           const card = document.createElement("div");
           card.className =
-            "bg-white p-4 rounded-lg shadow flex flex-col items-center justify-center hover:scale-105 transition-transform cursor-pointer";
+            "bg-white p-4 rounded-lg shadow text-center flex flex-col items-center justify-center hover:shadow-lg transition";
           card.innerHTML = `
-          <div class="text-4xl mb-2">${emoji.char}</div>
-          <div class="text-sm text-gray-600">${emoji.name}</div>
-          <button class="mt-2 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600" onclick="removeFavourite('${emoji.id}')">
-            Remove
-          </button>
-        `;
-          container.appendChild(card);
+            <div class="text-4xl mb-2">${emoji.htmlCode[0]}</div>
+            <strong class="mb-1">${emoji.name}</strong>
+            <small class="text-gray-500 mb-2">${emoji.category}</small>
+            <button class="remove-btn text-red-500">Remove</button>
+          `;
+
+          card.querySelector(".remove-btn").addEventListener("click", () => {
+            favourites.splice(index, 1);
+            localStorage.setItem("favourites", JSON.stringify(favourites));
+            renderFavourites();
+          });
+
+          favContainer.appendChild(card);
         });
       }
 
-      function removeFavourite(id) {
-        let favs = JSON.parse(localStorage.getItem("favourites")) || [];
-        favs = favs.filter((e) => e.id !== id);
-        localStorage.setItem("favourites", JSON.stringify(favs));
-        location.reload(); 
-      }
+      renderFavourites();
     </script>
-
-    <script src="./js/script.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./src/js/script.js"></script>
   </body>
 </html>

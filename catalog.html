@@ -16,7 +16,7 @@
         <nav>
           <a href="./index.html">Home</a>
           <a href="./catalog.html">Catalog</a>
-          <a href="">Favourites</a>
+          <a href="./favourite.html">Favourites</a>
         </nav>
       </div>
 
@@ -30,7 +30,9 @@
       </div>
     </header>
 
-    <h1 class="text-3xl md:text-5xl font-bold text-center mb-8 mt-10">
+    <h1
+      class="text-3xl md:text-5xl font-bold text-center mb-8 mt-10 text[#023047]"
+    >
       Emoji Hub
     </h1>
     <section class="mx-8 md:mx-20">
@@ -41,10 +43,16 @@
           placeholder="Search by name..."
           class="px-4 py-2 border rounded w-full sm:w-1/3"
         />
-        <select id="category" class="px-4 py-2 border rounded w-full sm:w-1/3">
+        <select
+          id="category"
+          class="px-4 py-2 border rounded w-full sm:w-1/3 text[#023047]"
+        >
           <option value="">All categories</option>
         </select>
-        <select id="sort" class="px-4 py-2 border rounded w-full sm:w-1/3">
+        <select
+          id="sort"
+          class="px-4 py-2 border rounded w-full sm:w-1/3 text[#023047]"
+        >
           <option value="">Alphabet</option>
           <option value="asc">A → Z</option>
           <option value="desc">Z → A</option>
@@ -53,7 +61,7 @@
 
       <div
         id="emoji-container"
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 text-[#023047]"
       ></div>
     </section>
     <script>
@@ -62,10 +70,13 @@
       const categorySelect = document.getElementById("category");
       const sortSelect = document.getElementById("sort");
       let emojis = [];
+      let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
 
       async function fetchEmojis() {
         try {
-          const res = await fetch("https://emojii-hub-production.up.railway.app/api/emojis");
+          const res = await fetch(
+            "https://emojii-hub-production.up.railway.app/api/emojis"
+          );
           const data = await res.json();
 
           if (!Array.isArray(data)) {
@@ -100,15 +111,23 @@
         sorted.forEach((emoji) => {
           const card = document.createElement("div");
           card.className =
-            "bg-white p-4 rounded-lg shadow text-center flex flex-col items-center justify-center hover:shadow-lg transition";
+            "bg-white p-4 rounded-lg shadow text-center flex flex-col items-center justify-center hover:shadow-lg transition relative";
+
+          const isFav = favourites.some((e) => e.name === emoji.name);
+          const heartClass = isFav ? "text-red-500" : "text-gray-400";
+
           card.innerHTML = `
-          <div class="text-4xl mb-2 cursor-pointer">${emoji.htmlCode[0]}</div>
-          <strong class="mb-1">${emoji.name}</strong>
-          <small class="text-gray-500">${emoji.category}</small>
-        `;
+        <div class="absolute top-2 right-2 cursor-pointer text-xl ${heartClass}" onclick="toggleFavourite('${emoji.name}')">
+          ♥
+        </div>
+        <div class="text-4xl mb-2 cursor-pointer">${emoji.htmlCode[0]}</div>
+        <strong class="mb-1">${emoji.name}</strong>
+        <small class="text-gray-500">${emoji.category}</small>
+      `;
           container.appendChild(card);
         });
       }
+
       function renderCategoryOptions() {
         const categories = [...new Set(emojis.map((e) => e.category))];
         categories.forEach((cat) => {
@@ -129,12 +148,26 @@
         renderEmojis(filtered);
       }
 
+      function toggleFavourite(name) {
+        const emoji = emojis.find((e) => e.name === name);
+        const exists = favourites.some((e) => e.name === name);
+
+        if (exists) {
+          favourites = favourites.filter((e) => e.name !== name);
+        } else {
+          favourites.push(emoji);
+        }
+        localStorage.setItem("favourites", JSON.stringify(favourites));
+        filterAndRender();
+      }
+
       searchInput.addEventListener("input", filterAndRender);
       categorySelect.addEventListener("change", filterAndRender);
       sortSelect.addEventListener("change", filterAndRender);
 
       fetchEmojis();
     </script>
+
     <script src="./src/js/script.js"></script>
   </body>
 </html>
